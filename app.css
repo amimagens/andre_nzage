@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+:root{
+    --laranja:#FF6B00;--azul:#0A2540;--cinza:#F6F9FC;--verde:#00C851;--branco:#FFFFFF;--vermelho:#ff4444;
+    --sombra:0 2px 8px rgba(10,37,64,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:var(--cinza);color:var(--azul);overflow-x:hidden}
+.loader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--azul);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;color:var(--branco)}
+.loader-spinner{width:50px;height:50px;border:4px solid var(--cinza);border-top:4px solid var(--laranja);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;justify-content:center;align-items:center;z-index:1000;padding:16px}
+.modal-overlay.active{display:flex}
+.modal-content{background:var(--branco);border-radius:16px;padding:24px;max-width:500px;width:100%;position:relative;max-height:90vh;overflow-y:auto}
+.modal-large{max-width:900px}
+.modal-close{position:absolute;top:12px;right:12px;background:none;border:none;font-size:24px;cursor:pointer;color:var(--azul)}
+.logo-grande{text-align:center;margin-bottom:16px}
+.logo-circle{width:80px;height:80px;background:var(--laranja);color:var(--branco);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:800;margin:0 auto}
+h1{color:var(--azul);font-size:24px;font-weight:800;text-align:center}
+.subtitle{text-align:center;color:#666;margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;margin-bottom:6px;font-weight:600;font-size:14px}
+.form-group input{width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;font-size:16px}
+.form-group input:focus{border-color:var(--laranja);outline:none}
+.btn{padding:12px 20px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:15px;transition:0.2s}
+.btn-primary{background:var(--laranja);color:var(--branco)}
+.btn-primary:hover{opacity:0.9;transform:translateY(-1px)}
+.btn-secondary{background:var(--azul);color:var(--branco)}
+.btn-success{background:var(--verde);color:var(--branco)}
+.btn-warning{background:#ffbb33;color:var(--azul)}
+.btn-danger{background:var(--vermelho);color:var(--branco)}
+.btn-block{width:100%}
+.btn-large{padding:16px 32px;font-size:18px}
+.login-hint{text-align:center;font-size:13px;color:#666;margin-top:16px}
+.navbar{background:var(--azul);color:var(--branco);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.navbar-title{font-size:18px;font-weight:700;cursor:pointer}
+.menu-toggle{background:none;border:none;color:var(--branco);font-size:24px;cursor:pointer;margin-right:12px}
+.navbar-left{display:flex;align-items:center}
+.user-info{margin-right:12px;font-size:14px}
+.btn-logout{background:var(--laranja);color:var(--branco);border:none;padding:8px 12px;border-radius:6px;font-size:13px}
+.sidebar{position:fixed;left:-280px;top:60px;width:280px;height:calc(100vh - 60px);background:var(--branco);box-shadow:var(--sombra);transition:0.3s;z-index:99;overflow-y:auto}
+.sidebar.ativo{left:0}
+.menu{list-style:none;padding:16px 0}
+.menu-item{display:block;padding:14px 20px;color:var(--azul);text-decoration:none;font-weight:600}
+.menu-item:hover{background:var(--cinza)}
+.text-danger{color:var(--vermelho)!important}
+.main-content{padding:16px;margin-top:60px}
+.tela{display:none}
+.tela.active{display:block}
+.container{max-width:1200px;margin:0 auto}
+.banner-progress{background:var(--branco);padding:20px;border-radius:16px;margin-bottom:20px;box-shadow:var(--sombra)}
+.progress-card{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:16px}
+.progress-bar{width:100%;height:8px;background:#e0e0e0;border-radius:4px;margin-top:8px}
+.progress-fill{height:100%;background:var(--laranja);border-radius:4px;transition:0.3s}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin:20px 0}
+.card-menu{background:var(--branco);padding:20px;border-radius:12px;text-align:center;cursor:pointer;box-shadow:var(--sombra);transition:0.2s}
+.card-menu:hover{transform:translateY(-3px)}
+.card-icon{font-size:32px;margin-bottom:8px}
+.card-menu h3{font-size:16px;margin-bottom:4px}
+.card-menu p{font-size:13px;color:#666}
+.aviso-card{background:#fff3cd;border-left:4px solid var(--laranja);padding:16px;border-radius:8px;margin:20px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.stat-card{background:var(--branco);padding:16px;border-radius:12px;text-align:center;box-shadow:var(--sombra)}
+.stat-number{font-size:28px;font-weight:800;color:var(--laranja);margin-top:8px}
+.aulas-grid,.exercicios-grid,.sites-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:20px}
+.aula-card,.ex-card,.site-card{background:var(--branco);padding:20px;border-radius:12px;box-shadow:var(--sombra)}
+.aula-card h3{margin-bottom:8px}
+.slide-image{width:100%;border-radius:12px;margin:16px 0}
+.slide-controls{display:flex;justify-content:space-between;align-items:center;margin:12px 0}
+.aula-texto{background:var(--cinza);padding:16px;border-radius:8px;margin:16px 0;line-height:1.6}
+.codigo-bloco{background:#1e1e1e;color:#d4d4d4;padding:16px;border-radius:8px;margin:16px 0;overflow-x:auto}
+.codigo-bloco pre{margin:0;font-family:monospace}
+.editor-full{display:flex;flex-direction:column;height:calc(100vh - 120px)}
+.editor-tabs{display:flex;gap:8px;margin:12px 0}
+.tab-btn{padding:10px 20px;background:var(--cinza);border:none;border-radius:8px 8px 0 0;font-weight:600}
+.tab-btn.active{background:var(--laranja);color:var(--branco)}
+.editor-container{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1}
+.code-editor{width:100%;height:100%;font-family:monospace;padding:12px;border:2px solid #ddd;border-radius:8px;font-size:14px;resize:none}
+.preview-area{background:var(--branco);border:2px solid #ddd;border-radius:8px;padding:12px;overflow:auto}
+.editor-buttons{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.editor-console{background:#1e1e1e;color:#00ff00;padding:12px;border-radius:8px;margin-top:16px;font-family:monospace;font-size:13px;min-height:100px}
+.filter-buttons{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.filter-btn{padding:8px 16px;border:2px solid var(--azul);background:none;border-radius:20px;font-weight:600}
+.filter-btn.active{background:var(--azul);color:var(--branco)}
+.badge{padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;display:inline-block}
+.badge.facil{background:#d4edda;color:#155724}
+.badge.medio{background:#fff3cd;color:#856404}
+.badge.desafio{background:#f8d7da;color:#721c24}
+.quiz-container.pergunta{margin-bottom:24px}
+.alternativa{padding:12px;border:2px solid #ddd;border-radius:8px;margin:8px 0;cursor:pointer}
+.alternativa:hover{border-color:var(--laranja)}
+.alternativa.correta{background:#d4edda;border-color:var(--verde)}
+.alternativa.errada{background:#f8d7da;border-color:var(--vermelho)}
+.search-box input{width:100%;padding:14px;border:2px solid #ddd;border-radius:8px;font-size:16px;margin-bottom:20px}
+.faq-item{background:var(--branco);margin-bottom:12px;border-radius:12px;overflow:hidden;box-shadow:var(--sombra)}
+.faq-pergunta{padding:16px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between}
+.faq-resposta{padding:0 16px;max-height:0;overflow:hidden;transition:0.3s}
+.faq-item.ativo.faq-resposta{padding:16px;max-height:500px;border-top:1px solid #eee}
+.modo-prof-container{padding:20px;background:var(--cinza);min-height:100vh}
+.prof-menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:20px}
+.prof-card{background:var(--branco);padding:24px;border-radius:12px;text-align:center;cursor:pointer;box-shadow:var(--sombra)}
+.prof-card:hover{background:var(--laranja);color:var(--branco)}
+@media (max-width:768px){.editor-container{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr}.progress-card{flex-direction:column}}
+

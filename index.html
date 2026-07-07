@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e40af">
+    <meta name="description" content="UNGIMU WEB LAB - Código do Zero ao Site">
+    <title>UNGIMU WEB LAB</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%231e40af' width='180' height='180'/><text x='50%' y='50%' font-size='80' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='central'>U</text></svg>">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <!-- LOADER -->
+    <div id="loader" class="loader">
+        <div class="loader-spinner"></div>
+        <p>Carregando UNGIMU WEB LAB...</p>
+    </div>
+
+    <!-- MODAL LOGIN -->
+    <div id="loginModal" class="modal-overlay active">
+        <div class="modal-content modal-login">
+            <div class="logo-grande">
+                <div class="logo-circle">U</div>
+            </div>
+            <h1>UNGIMU WEB LAB</h1>
+            <p class="subtitle">Código do Zero ao Site</p>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="senha">Chave de Acesso:</label>
+                    <input type="password" id="senha" placeholder="Digite a chave" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            </form>
+            <p class="login-hint">💡 Entre com a chave fornecida pelo professor</p>
+        </div>
+    </div>
+
+    <!-- APP CONTAINER -->
+    <div id="app" class="app-container" style="display:none;">
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="navbar-left">
+                <button id="menuToggle" class="menu-toggle">☰</button>
+                <h1 class="navbar-title" onclick="abreModalEasterEgg()">UNGIMU WEB LAB</h1>
+            </div>
+            <div class="navbar-right">
+                <span id="usuario" class="user-info">Aluno</span>
+                <button id="btnLogout" class="btn-logout">Sair</button>
+            </div>
+        </nav>
+        
+        
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="sidebar">
+            <ul class="menu">
+                <li><a href="#" onclick="irPara('home')" class="menu-item">🏠 Início</a></li>
+                <li><a href="#" onclick="irPara('aulas')" class="menu-item">📚 Aulas</a></li>
+                <li><a href="#" onclick="irPara('editor')" class="menu-item">💻 Editor Código</a></li>
+                <li><a href="#" onclick="irPara('exercicios')" class="menu-item">✏️ Exercícios</a></li>
+                <li><a href="#" onclick="irPara('quiz')" class="menu-item">❓ Quiz</a></li>
+                <li><a href="#" onclick="irPara('faq')" class="menu-item">💬 Tira-Dúvidas</a></li>
+                <li><a href="#" onclick="irPara('meusites')" class="menu-item">🌐 Meus Sites</a></li>
+                <li><a href="#" onclick="irPara('certificado')" class="menu-item">🏆 Certificado</a></li>
+                <li><hr></li>
+                <li><a href="#" onclick="irPara('sobre')" class="menu-item">ℹ️ Sobre</a></li>
+                <li><a href="#" onclick="fazerLogout()" class="menu-item text-danger">🚪 Sair</a></li>
+            </ul>
+        </aside>
+        <!-- BOTÃO INSTALAR PWA - ISOLADO -->
+<div id="pwa-install-wrap">
+  <style>
+    #pwa-install-wrap .pwa-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      padding: 14px 24px;
+      border-radius: 50px;
+      background: #FF6B00;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(255,107,0,0.4);
+      cursor: pointer;
+      display: none;
+    }
+    #pwa-install-wrap .pwa-btn:active { transform: scale(0.95); }
+  </style>
+
+  <button id="pwaInstallBtn" class="pwa-btn">📲 Instalar App</button>
+
+  <script>
+    (function() {
+      let deferredPrompt;
+      const btn = document.getElementById('pwaInstallBtn');
+      
+      window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        btn.style.display = 'block';
+      });
+
+      btn.addEventListener('click', function() {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(choice) {
+          if (choice.outcome === 'accepted') {
+            console.log('App instalado');
+          }
+          deferredPrompt = null;
+          btn.style.display = 'none';
+        });
+      });
+
+      window.addEventListener('appinstalled', function() {
+        btn.style.display = 'none';
+      });
+    })();
+  </script>
+</div>
+<!-- FIM BOTÃO INSTALAR -->
+        
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+            <!-- HOME -->
+            <section id="home" class="tela active">
+                <div class="container">
+                    <div class="banner-progress">
+                        <h2>Bem-vindo! 👋</h2>
+                        <div class="progress-card">
+                            <div class="progress-info">
+                                <p id="progressTexto">Semana 1 • Aula 1 de 5 • 20%</p>
+                                <div class="progress-bar">
+                                    <div id="progressBar" class="progress-fill" style="width: 20%"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="irPara('aulas')">▶ Continuar Aula</button>
+                        </div>
+                    </div>
+
+                    <div class="grid-4">
+                        <div class="card-menu" onclick="irPara('aulas')">
+                            <div class="card-icon">📚</div>
+                            <h3>Aulas</h3>
+                            <p id="aulasCount">5 aulas</p>
+                        </div>
+                        <div class="card-menu" onclick="irPara('editor')">
+                            <div class="card-icon">💻</div>
+                            <h3>Editor</h3>
+                            <p>Codifique aqui</p>
+                        </div>
+                        <div class="card-menu" onclick="irPara('exercicios')">
+                            <div class="card-icon">✏️</div>
+                            <h3>Exercícios</h3>
+                            <p id="exCount">15 exerc.</p>
+                        </div>
+                        <div class="card-menu" onclick="irPara('quiz')">
+                            <div class="card-icon">❓</div>
+                            <h3>Quiz</h3>
+                            <p id="quizCount">10 quest.</p>
+                        </div>
+                    </div>
+
+                    <div class="aviso-card">
+                        <p>📌 <strong>Aviso:</strong> Estude todas as aulas para liberar o certificado!</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4>Exercícios Feitos</h4>
+                            <p id="exFeitosCount" class="stat-number">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Pontuação Quiz</h4>
+                            <p id="pontuacaoTotal" class="stat-number">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Aulas Concluídas</h4>
+                            <p id="aulasConcCount" class="stat-number">0</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AULAS -->
+            <section id="aulas" class="tela">
+                <div class="container">
+                    <h2>📚 Aulas - Semana 1</h2>
+
+                    <div id="aulasContainer" class="aulas-grid">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+
+                    <!-- MODAL AULA DETALHADA -->
+                    <div id="aulaBigModal" class="modal-overlay">
+                        <div class="modal-content modal-large">
+                            <button class="modal-close" onclick="fechaModaAula()">✕</button>
+
+                            <div class="aula-tv-modo">
+                                <img id="slideImg" src="" alt="Slide" class="slide-image">
+                                <div class="slide-controls">
+                                    <button onclick="slideAnterior()" class="btn btn-secondary">← Anterior</button>
+                                    <span id="slideCounter">1 / 1</span>
+                                    <button onclick="proximoSlide()" class="btn btn-secondary">Próximo →</button>
+                                </div>
+                            </div>
+
+                            <div class="aula-content">
+                                <h3 id="aulaTitulo"></h3>
+
+                                <div class="aula-audio">
+                                    <audio id="audioAula" controls style="width: 100%;">
+                                        <source src="" type="audio/mpeg">
+                                    </audio>
+                                </div>
+
+                                <div id="aulaTexto" class="aula-texto">
+                                    <!-- Preenchido dinamicamente -->
+                                </div>
+
+                                <div id="aulaCodigoBloco" class="codigo-bloco" style="display:none;">
+                                    <h4>💾 Código Exemplo:</h4>
+                                    <pre><code id="codigoExemplo"></code></pre>
+                                    <button class="btn btn-success" onclick="copiarCodigo()">📋 Copiar Código</button>
+                                    <button class="btn btn-primary" onclick="testarNoEditor()">▶ Testar no Editor</button>
+                                </div>
+
+                                <button class="btn btn-primary btn-block" onclick="irPara('exercicios')">
+                                    ➔ Ir para Exercícios
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EDITOR DE CÓDIGO -->
+            <section id="editor" class="tela">
+                <div class="container editor-full">
+                    <h2>💻 Editor de Código</h2>
+
+                    <div class="editor-tabs">
+                        <button class="tab-btn active" data-tab="html">HTML</button>
+                        <button class="tab-btn" data-tab="css">CSS</button>
+                        <button class="tab-btn" data-tab="js">JS</button>
+                    </div>
+
+                    <div class="editor-container">
+                        <div class="editor-left">
+                            <textarea id="htmlCode" class="code-editor" data-language="html" placeholder="Escreva HTML aqui..."></textarea>
+                            <textarea id="cssCode" class="code-editor" data-language="css" placeholder="Escreva CSS aqui..." style="display:none;"></textarea>
+                            <textarea id="jsCode" class="code-editor" data-language="js" placeholder="Escreva JS aqui..." style="display:none;"></textarea>
+
+                            <div class="editor-buttons">
+                                <button class="btn btn-primary" onclick="rodarCodigo()">▶ Rodar Código</button>
+                                <button class="btn btn-success" onclick="salvarProjeto()">💾 Salvar Projeto</button>
+                                <button class="btn btn-secondary" onclick="exportarZip()">📦 Exportar ZIP</button>
+                                <button class="btn btn-warning" onclick="limparCodigo()">🗑️ Limpar</button>
+                            </div>
+                        </div>
+
+                        <div class="editor-right">
+                            <div id="preview" class="preview-area">
+                                <p style="text-align: center; color: #999; margin-top: 50px;">Resultado aparecerá aqui →</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-console">
+                        <h4>📟 Console:</h4>
+                        <div id="console" class="console-output"></div>
+                        <button class="btn btn-secondary" onclick="limparConsole()">Limpar Console</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXERCÍCIOS -->
+            <section id="exercicios" class="tela">
+                <div class="container">
+                    <h2>✏️ Exercícios</h2>
+
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filtrarExercicios('todos')">Todos</button>
+                        <button class="filter-btn" onclick="filtrarExercicios('facil')">🟢 Fácil</button>
+                        <button class="filter-btn" onclick="filtrarExercicios('medio')">🟡 Médio</button>
+                        <button class="filter-btn" onclick="filtrarExercicios('desafio')">🔴 Desafio</button>
+                    </div>
+
+                    <div id="exerciciosContainer" class="exercicios-grid">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+
+                    <!-- MODAL EXERCÍCIO -->
+                    <div id="exercicioModal" class="modal-overlay">
+                        <div class="modal-content modal-large">
+                            <button class="modal-close" onclick="fechaModalExercicio()">✕</button>
+
+                            <h3 id="exTitulo"></h3>
+                            <p id="exNivel" class="badge"></p>
+                            <p id="exDescricao"></p>
+
+                            <div class="ex-codigo">
+                                <h4>Resposta do Código:</h4>
+                                <pre><code id="exResposta"></code></pre>
+                                <button class="btn btn-success" onclick="copiarRespostaEx()">📋 Copiar</button>
+                            </div>
+
+                            <div id="exDica" class="ex-dica" style="display:none;">
+                                <h4>💡 Dica:</h4>
+                                <p id="exDicaTexto"></p>
+                            </div>
+
+                            <div class="modal-buttons">
+                                <button class="btn btn-secondary" onclick="mostrarDicaEx()">Ver Dica</button>
+                                <button class="btn btn-primary" onclick="testarNoEditorEx()">▶ Testar no Editor</button>
+                                <button class="btn btn-warning" onclick="fechaModalExercicio()">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QUIZ -->
+            <section id="quiz" class="tela">
+                <div class="container">
+                    <h2>❓ Quiz - Semana 1</h2>
+
+                    <div id="quizContainer" class="quiz-container">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+
+                    <div class="quiz-buttons">
+                        <button class="btn btn-secondary" onclick="resetarQuiz()">🔄 Recomeçar Quiz</button>
+                        <button class="btn btn-primary" onclick="irPara('home')">🏠 Voltar Home</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIRA-DÚVIDAS (FAQ) -->
+            <section id="faq" class="tela">
+                <div class="container">
+                    <h2>💬 Tira-Dúvidas</h2>
+
+                    <div class="search-box">
+                        <input type="text" id="buscaFaq" placeholder="🔍 Busque sua dúvida..." onkeyup="buscarFaq()">
+                    </div>
+
+                    <div id="faqContainer" class="faq-container">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- MEUS SITES -->
+            <section id="meusites" class="tela">
+                <div class="container">
+                    <h2>🌐 Meus Sites</h2>
+
+                    <div class="novo-site">
+                        <button class="btn btn-primary btn-large" onclick="novoSite()">➕ Novo Site</button>
+                    </div>
+
+                    <div id="meusSitesContainer" class="sites-grid">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- CERTIFICADO -->
+            <section id="certificado" class="tela">
+                <div class="container">
+                    <h2>🏆 Certificado</h2>
+
+                    <div id="certificadoContainer" class="certificado-area">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOBRE -->
+            <section id="sobre" class="tela">
+                <div class="container">
+                    <h2>ℹ️ Sobre UNGIMU WEB LAB</h2>
+
+                    <div class="about-card">
+                        <h3>Bem-vindo à Oficina de Criação de Sites!</h3>
+                        <p>O UNGIMU WEB LAB é um aplicativo educacional offline que te guia do zero até ter seu primeiro site profissional.</p>
+
+                        <h4>📍 Professores:</h4>
+                        <ul>
+                            <li>Prof. André</li>
+                            <li>Prof. Luisandro</li>
+                        </ul>
+
+                        <h4>🎯 O que você vai aprender:</h4>
+                        <ul>
+                            <li>✅ Semana 1: HTML - Os Ossos</li>
+                            <li>✅ Semana 2: CSS - A Roupa</li>
+                            <li>✅ Semana 3: CSS Avançado + Layout</li>
+                            <li>✅ Semana 4: JavaScript - O Cérebro</li>
+                        </ul>
+
+                        <h4>🚀 Projetos que você vai criar:</h4>
+                        <ol>
+                            <li>Site Cartão de Visita Digital</li>
+                            <li>Site Currículo Online</li>
+                            <li>Site Portfólio com Galeria</li>
+                            <li>Site Completo Customizado</li>
+                        </ol>
+
+                        <p style="margin-top: 30px; font-size: 12px; color: #666;">
+                            <strong>Versão:</strong> 1.0.0 | <strong>Modo:</strong> 100% Offline | <strong>Última atualização:</strong> 2026
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL EASTER EGG PROF -->
+    <div id="modalProf" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="fechaModalProf()">✕</button>
+            <h3>🔐 Painel do Professor</h3>
+            <input type="password" id="senhaProf" placeholder="Digite a senha do professor" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+            <button class="btn btn-primary" onclick="entrarModoProf()">Entrar</button>
+        </div>
+    </div>
+
+    <!-- MODO PROFESSOR -->
+    <div id="modoProfContainer" class="modo-prof-container" style="display:none;">
+        <nav class="navbar">
+            <h1>👨‍🏫 MODO PROFESSOR - UNGIMU WEB LAB</h1>
+            <button class="btn btn-danger" onclick="sairModoProf()">Sair do Modo Prof</button>
+        </nav>
+
+        <div class="prof-menu">
+            <div class="prof-card" onclick="abrirProfTV()">
+                <h3>📺 Modo TV</h3>
+                <p>Controle slides na tela cheia</p>
+            </div>
+            <div class="prof-card" onclick="abrirProfChamada()">
+                <h3>📋 Chamada</h3>
+                <p>Marque presença dos alunos</p>
+            </div>
+            <div class="prof-card" onclick="abrirProfDuvida()">
+                <h3>❓ Nova Dúvida</h3>
+                <p>Adicione FAQ em tempo real</p>
+            </div>
+            <div class="prof-card" onclick="abrirProfEstat()">
+                <h3>📊 Estatísticas</h3>
+                <p>Veja progresso da turma</p>
+            </div>
+            <div class="prof-card" onclick="abrirProfAviso()">
+                <h3>📢 Enviar Aviso</h3>
+                <p>Mensagem para todos alunos</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+FIM
